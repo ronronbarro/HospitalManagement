@@ -1,0 +1,18 @@
+﻿@page "/login"
+<h3>Login</h3>
+
+<div class="login-form">
+    <div class="form-group">
+        <div class="row pt-2 px-2">
+            <input class="form-control" type="text" name="username" placeholder="username" @bind-value = "LoginDto.Username"/>        
+        </div>
+        <div class="row pt-2 px-2">
+            <input class="form-control" type="password" name="password" placeholder="password" @bind-value="LoginDto.Password" />
+        </div>
+
+        <div class="row pt-5 px-5"> 
+            <button class="btn btn-primary" type="submit" @onclick="OnLogin">Login</button>
+        </div>
+
+    </div>
+</div>

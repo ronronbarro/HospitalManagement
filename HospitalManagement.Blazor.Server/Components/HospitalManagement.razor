@@ -1,0 +1,116 @@
+﻿@page "/hospital"
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-2">
+        </div>
+        <div class="col-md-4">
+            <div class="row">
+                <h3> Manage Hospital </h3>
+            </div>
+            @foreach (var item in Hospitals)
+            {
+                <div class="row mt-3">
+                    <div class="card h-100">                       
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <img src="img/hospital.png" style="height:100%; width:100%;"/>
+                                </div>
+                                <div class="col-md-9">
+                                    <h5 class="card-title">@item.Name</h5>
+                                    <h6>ID: @item.Hospital_Id</h6>
+                                </div>
+                            </div>
+                            
+                            
+                        </div>
+                        <div class="card-footer">
+                            <div style="display:flex; justify-content: space-between; ">
+                                <a href="" class="text-muted">Show details</a>
+                                <a href="" class="text-muted">Full overview</a>
+                            </div>               
+                           
+                        </div>
+                    </div>
+
+                </div>
+            }
+           
+        </div>
+        <div class="col-md-2">
+        </div>
+        <div class="col-md-2">
+        </div>
+        <div class="col-md-2">
+            <button class="btn btn-sm" style="background-color:darkviolet; color: white" @onclick="ShowModal">+ Create Hospital</button>
+        </div>
+        
+    </div>
+</div>
+
+@if (showModal)
+{
+    <div class="modal fade show" id="addHospital" tabindex="-1" style="display:block; color:white; background-color:rgba(55, 56, 56,.2)" aria-modal="true" role="dialog">
+        <div class="modal-dialog modal-md">
+            <div class="modal-content custom-modal">
+                <div class="modal-header">
+                    <h5 class="modal-title">New Hospital</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" @onclick="OnClose"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-6 p-3">
+                            <span>Hospital name</span>
+                            <input class="form-control" @bind-value="Hospital.Name" />
+                        </div>
+                        <div class="col-6 p-3">
+                            <span>Hospital Id</span>
+                            <input class="form-control" @bind-value="Hospital.Hospital_Id" />
+                        </div>
+                    </div>
+                    <div class="row">
+                        <span>Status</span>
+                        <div class="input-group">
+                            <input type="checkbox" @bind-value="Hospital.Is_Active" />
+                            Active
+                        </div>
+                    </div>
+
+                    <div class="row p-3">
+                        TestDynamics account manager
+                        <select @bind="Hospital.Account_Manager">
+                            <option value="" disabled>Select an option</option>
+                            @foreach (var item in Users)
+                            {
+                                <option value="@item.Id">@item.Firstname @item.Lastname</option>
+                            }                           
+                        </select>
+                    </div>
+
+                    <div class="row p-3">
+                        Plans
+                        <select @bind="Hospital.Plan_Assigned">
+                            <option value="" disabled>Select an option</option>
+                            @foreach (var item in Plans)
+                            {
+                                <option value="@item">@item</option>
+                            }
+                        </select>
+                    </div>
+                </div>
+
+                <div class="d-flex justify-content-between py-2 px-2">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" @onclick="OnClose">Cancel</button>
+                        <button type="button" class="btn btn-primary" @onclick="OnSave">Save</button>
+                    </div>
+                   
+              
+            </div>
+        </div>
+    </div>
+}
+
+
+

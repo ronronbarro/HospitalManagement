@@ -1,0 +1,39 @@
+﻿@inherits LayoutComponentBase
+
+<PageTitle>HospitalManagement.Blazor.Server</PageTitle>
+
+<div class="page"> 
+
+    <main>
+        <div class="top-row px-4">
+            <div class="dropdown">
+                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-bs-toggle="dropdown" aria-expanded="false">
+                    Management
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                    @foreach (var item in dropdownItems)
+                    {
+                        <li><button class="dropdown-item" type="button" @onclick="(e => OnDropdownItemClicked(item))">@item</button></li>
+                    }                   
+                </ul>
+            </div>
+        </div>
+
+        <article class="content px-4">
+            @Body
+        </article>
+    </main>
+</div>
+
+@code{
+    [Inject] private NavigationManager? NavigationManager { get; set; }
+    List<string> dropdownItems = new List<string> { "Hospital Management" };
+
+    private void OnDropdownItemClicked(string item)
+    {
+        if (item.Equals("Hospital Management"))
+        {
+            NavigationManager.NavigateTo("/hospital");
+        }
+    }
+}
